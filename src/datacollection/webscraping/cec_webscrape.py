@@ -9,7 +9,7 @@ import sqlite3
 from bs4 import BeautifulSoup
 
 # CONSTS
-connection = sqlite3.connect(os.getcwd() + os.sep + "course_info.db")
+connection = sqlite3.connect(os.getcwd() + os.sep + "data" + os.sep + "course_info_data" + os.sep + "intermediate.db")
 base_catalog = "https://catalog.gmu.edu"
 base_masters_url = "https://catalog.gmu.edu/programs/#filter=.filter_23"
 base_phd_url = "https://catalog.gmu.edu/programs/#filter=.filter_23&.filter_28"
@@ -262,7 +262,3 @@ def init():
     init_create_dbs()
     scape_masters_info()
     #scrape_phd_info()
-
-
-def select_masters_cec_website(filter):
-    print("Selecting values from our program...")
