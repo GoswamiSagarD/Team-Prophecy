@@ -9,7 +9,7 @@ import sqlite3
 from bs4 import BeautifulSoup
 
 # CONSTS
-connection = sqlite3.connect(os.getcwd() + os.sep + "data" + os.sep + "course_info_data" + os.sep + "intermediate.db")
+connection = sqlite3.connect(os.getcwd() + os.sep + "data" + os.sep + "course_info_data" + os.sep + "02_intermediate" + os.sep + "intermediate.db")
 base_catalog = "https://catalog.gmu.edu"
 base_masters_url = "https://catalog.gmu.edu/programs/#filter=.filter_23"
 base_phd_url = "https://catalog.gmu.edu/programs/#filter=.filter_23&.filter_28"
