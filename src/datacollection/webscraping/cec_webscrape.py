@@ -184,10 +184,14 @@ def programToClasses(program,classes,required,m_dict):
 
 
 def scape_masters_info():
+    phd_html_listed = requests.get(base_phd_url)
     masters_html_listed = requests.get(base_masters_url)
     print("Now, we process our masters...")
     if masters_html_listed.status_code != 200:
         print("Could not retrieve list of masters classes")
+        return
+    if phd_html_listed.status_code != 200:
+        print("Could not retrieve list of phd classes")
         return
     # Match using this: (\/colleges-schools\/.+?(?=\")) for masters
     masters_content = str(masters_html_listed.content)
@@ -209,6 +213,23 @@ def scape_masters_info():
         master_link_dict[i] = ProgramInfo(i, name, m_iter, type, school)
         i += 1
     prog_info_list = [i.to_sql_insert(True) for i in master_link_dict.values()]
+
+    phd_content = str(phd_html_listed.content)
+    phd_content_list = re.findall(r"(\/colleges-schools\/.+?(?=\"))", phd_content)[1:]
+    print("Phd Content List will now be filtered.")
+    phd_content_list = [p_iter for p_iter in phd_content_list if ("-phd" in p_iter)]
+    phd_link_dict = {}
+    # Now that we have all values listed, we should rework them so that they can be handled
+    for p_iter in phd_content_list:
+        cert_list = p_iter.split("/")
+        cert_list = cert_list[1:len(cert_list) - 1]
+        name = cert_list[len(cert_list) - 1]
+        type = "phd"
+        school = cert_list[len(cert_list) - 2]
+        phd_link_dict[i] = ProgramInfo(i, name, m_iter, type, school)
+        i += 1
+    prog_info_list.extend([i.to_sql_insert(True) for i in phd_link_dict.values()])
+
 
     #id,name,url,program_type,program_school
     connection.executemany("INSERT INTO program_info VALUES(?,?,?,?,?)", prog_info_list)
@@ -251,9 +272,6 @@ def scape_masters_info():
     #grouping_set = grouping_set.union(set([c[0] for c in course_grouping_dict.values()]))
 
     #From then on, it's likely best if we handle all Professor variables.
-
-def scrape_phd_info():
-    phd_html_listed = requests.get(base_phd_url)
 
 
 def init():
