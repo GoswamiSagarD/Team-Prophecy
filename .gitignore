@@ -1,1 +1,6 @@
-/New/Data
+
+*.csv
+*.pkl
+*.xlsx
+*.db
+*.pyc
