@@ -58,7 +58,7 @@ def init_create_dbs():
     # This will be our program (program type = phd, masters or graduate cert; program_school = where we are getting the value from)
     connection.execute("CREATE TABLE program_info("
                        "program_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                       "program_name TEXT NOT NULL, "
+                       "program_name TEXT UNIQUE NOT NULL, "
                        "program_url TEXT NOT NULL, "
                        "program_type TEXT NOT NULL, "
                        "program_school TEXT NOT NULL"

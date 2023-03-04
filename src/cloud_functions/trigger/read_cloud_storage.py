@@ -49,6 +49,7 @@ def assess_file_entrypoint(): #cloud_event
         #If our snapshot doesn't exist, we have nothing to worry about and we can create our instance type...
         if client_instance is None:
             client_instance = create_instance_from_template()
+
     except Exception as e:
         print(f"This was the error that we encountered: {e}")
     finally:

@@ -1,62 +1,22 @@
 sudo apt update
 sudo apt -y install bzip2 git libxml2-dev
-sudo apt -y install python3 python3-pip
+sudo apt -y install python3 pip
 
-sudo pip3 install beautifulsoup4
-sudo pip3 install gcloud
-sudo pip3 install glob2
-sudo pip3 install virtualenv
-sudo pip3 install google-api-core
-sudo pip3 install google-auth
-sudo pip3 install google-cloud-compute
-sudo pip3 install google-cloud-core
-sudo pip3 install google-cloud-storage
+sudo pip3 install beautifulsoup4 gcloud glob2 virtualenv
+sudo pip3 install google-api-core google-auth google-cloud-compute google-cloud-core google-cloud-storage
 
 #Note: You can replace with your email address for the bash script
 git config --global user.name 'Joe Brock'
 git config --global user.email 'joebbrock3@gmail.com'
 
-eval "$(ssh-agent -s)"
-cat "-----BEGIN OPENSSH PRIVATE KEY-----
-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
------END OPENSSH PRIVATE KEY-----
-" > ~/.ssh/id_rsa
-
-mkdir Capstone
-cd Capstone
-git clone repo
+curl -u "Authorization: token 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" https://github.com/GoswamiSagarD/Team-Prophecy.git
+git clone -b master https://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@github.com/GoswamiSagarD/Team-Prophecy.git
+#python3 ./main.py
+#THIS WORKS
+#gcloud compute snapshots list --project tprophecy-378622 #<- For listing all snapshots under our project
+gcloud compute snapshots delete --quiet cec-snapshots
+gcloud compute snapshots create "cec-snapshot" \
+  --source-disk "cec-instance-1" \
+  --disk-zone "us-east4-c" \
+  --snapshot-type "STANDARD"
+gcloud compute instance delete cec-instance-1 --quiet --zone=us-east4-c
