@@ -2,8 +2,8 @@
 class ConnectDB:
     def __init__(self, db_path):
         import sqlite3
-        self.sql_connection = sqlite3.connect(db_path)
-        self.sql_cursor = self.sql_connection.cursor()
+        self.connection = sqlite3.connect(db_path)
+        self.cursor = self.connection.cursor()
 
     def run_query(self, query, committing=False):
         """
@@ -15,9 +15,9 @@ class ConnectDB:
         Returns:
             list: The results of the query
         """
-        query_execution = self.sql_cursor.execute(query)
+        query_execution = self.cursor.execute(query)
         if committing:
-            self.sql_connection.commit()
+            self.connection.commit()
         
         return query_execution
 
@@ -30,4 +30,4 @@ class ConnectDB:
         Returns:
             None
         """
-        self.sql_connection.commit()
+        self.connection.commit()
