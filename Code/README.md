@@ -16,7 +16,7 @@ Please maintain the following coding practices:
    2. Later, all the files should be located by specifying relative path from source as follow:
 
       ```python
-      file_path = os.path.join( src, "Data", "02processed", "merged.csv" )
+      file_path = os.path.join( "Data", "02processed", "merged.csv" )
       ```
    3. Why bother with these?
 

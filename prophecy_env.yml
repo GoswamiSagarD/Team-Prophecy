@@ -1,0 +1,8 @@
+name: prophecy
+channels:
+  - defaults
+dependencies:
+  - ipykernel
+  - jupyter
+  - pandas
+  - openpyxl

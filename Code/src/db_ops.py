@@ -14,7 +14,7 @@ class ConnectDB:
         self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
 
-    def run_query(self, query, committing=False):
+    def runQuery(self, query, fetchall=True, committing=False):
         """
         Run a query on the database
         
@@ -24,13 +24,20 @@ class ConnectDB:
         Returns:
             list: The results of the query
         """
+        import pandas as pd
         query_execution = self.cursor.execute(query)
         if committing:
             self.connection.commit()
         
-        return query_execution
+        if fetchall:
+            return pd.DataFrame(
+                query_execution.fetchall(),
+                columns=[i[0] for i in query_execution.description]
+            )
+        else:
+            return query_execution
 
-    def commit(self):
+    def commitDB(self):
         """
         Commit the changes to the database
         
