@@ -9,15 +9,14 @@ Please maintain the following coding practices:
 
       ```python
       import os
-      _ = os.path.sep
-      src = ".." +_+ ".."
+      src = os.path.join("..", "..")
 
       # here, 2 ".." means moving 2 folders up to locate the source folder.
       ```
    2. Later, all the files should be located by specifying relative path from source as follow:
 
       ```python
-      file_path = src +_+ "Data" +_+ "02processed" +_+ "merged.csv"
+      file_path = os.path.join( src, "Data", "02processed", "merged.csv" )
       ```
    3. Why bother with these?
 
@@ -27,7 +26,7 @@ Please maintain the following coding practices:
    1. DO NOT IMPORT MODULES IN BETWEEN THE CODE.
    2. Knowing about all the required modules in advance will be of great help, when working in a group, trust me.
 
-## Scripts
+## scripts
 
 ### buildData.py
 
@@ -49,6 +48,26 @@ To build the dataset, run the `Code/buildData.py` file. The buildData file will 
 4. Normalize the data
    1. SQLite Database (Normalized)
    2. SQLite Database (Normalized)
+
+### db_ops.py
+
+To connect to SQLite Database and run queries. To use db_ops module:
+
+1. Connect to the SQLite Database
+
+   ```python
+   db_enrollment = ConnectDB( os.path.join("..", "..", "Data", "02_processed", "enrollment4EDA.db") )
+   ```
+2. Run Queries on the Database
+
+   ```
+   db_enrollment.run_query( query = """
+   	SELECT *
+   	FROM enrollment4EDA
+   	WHERE crs_dept = ""
+   """)
+   ```
+3. Commit changes to the Database
 
 ## Code Structure
 
