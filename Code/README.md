@@ -42,19 +42,21 @@ To build the dataset, run the `Code/buildData.py` file. The buildData file will 
    5. Reset index, Create surrogate keys to identify each record in the newly merged dataset.
    6. Change Data-types
    7. Reorder columns
-8. Export the merged data
+3. Export the merged data
    1. CSV File
    2. SQLite Database (Not-normalized)
    3. Pickle File (Pandas Dataframe)
-9. Normalize the data
+4. Normalize the data
    1. SQLite Database (Normalized)
-   1. SQLite Database (Normalized)
+   2. SQLite Database (Normalized)
 
 ## Code Structure
 
 The code is organized in the following manner:
 
-### 00Misc Folder
+![1677978976673](../Deliverables/Misc/FolderStructure.png)
+
+### src
 
 The `00Misc` Folder contains all the necessary python modules, required to automate various aspects of the project. Some of the modules are as follows:
 
