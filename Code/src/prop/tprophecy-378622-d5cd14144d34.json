@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "tprophecy-378622",
+  "private_key_id": "d5cd14144d34d127ecd3115e9bfb21fca964df0f",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCw7Vr1RnoKYUSW\nPoTRSh3VHZV18Ki/cskWKM9k4vvL0pqIUO5X0KErbf1k4Qle5V8+5VqrAyy8Pz1l\nb6rljN44JYxZ16GskmusMEDdc0wtdaWi5WU6Oi6k9KCraq574BlmCuMLETYhrWyF\nAUB39qKhWYAUAFOb9bFAOWPsz/EH8IRxlUW3q9Ws+QWQ1CUT0l4f4gE7irLLu6GY\nnO7yvUe3FARHVtqJmDvKQJzCo/y9Ha+HN1Hg908yiV9YcJj/3uNCeF4SId7rb/H/\nWo52iXiIUUG0+w7wj4Qn6chfnPEGdDMtRVc3EkETGv6eKR2LzeDkEaZmGJQH4I9q\nEpv/VYrJAgMBAAECggEAUwUNSUpoubYqmNV9PTeqB/Z5y33BsRQLh3pe1tgrjtij\n6pMPQ+WBuv9Bh7SQ0RaQOtMkWFqFA1ApXw+nAU+4dmAoG4AzPOb33zRFO6R+elZa\nArXhahEjEgQ34DeO6FGfmWJCZ08MN4FJCqArwB7a8RsuHjSJBwWixqAnY1evoilQ\nuGPk20/+PQ9omBRPSQhHac1SANonD/uUNkT5UBNiJmUAz9cTxXER2PccbOxBDRYk\nkwHmqvtrIQhZzHhy+HpXdtVYeSjZR8lShdjWYrREaIEgS89LWCGB5StvygZXKxOh\nyck+P5ggTpdf3JCNmO+QCin0mKXquqq56fP6gTFYgQKBgQDw6lrSC+iPDEtc0TNr\nS21NaSHfHGbHWVh/I76AV4pDVC88vSPB+eVexKJIGCFUayLHhcUVRXr/qXXJhEKb\nCB8m73PJ+SgOQrW5S8KvqjeesuLyPkHWAquR9aOOdXart6uiv8cLbTzUaRLJOPE9\nsnEQUGq4wYdA9hP1TNZwCpt86wKBgQC8AVRQg6F/hrmZgIT1vhNpzcD3pdUArHAn\nGlpwj+e+YLP4YcalPmjhM1zjJpNS3V/8tTR8sy1Ggfz8Nx/gylob0KWd1U1OygEg\n3drD7g/+Wxy42J/9Mj7VoxzC7Sl1HOD3AlAk0nAyiRGtoyZ5egTU5CbOL+9U7eyp\n7OcoDN6aGwKBgQDkmr1Li5lGBDiO/sR4D77MMfK+L8knaRScsGJYjrjYYs3gKOoB\nawvH/XawSpV18aOzCLCXGrM4Xqkya5p4WiCVZarOAOuNfKfMCKPY5QCaSs0naQQ3\n+5iqjBiDWdsd3s+zQ5+wrBuIw5vb7XidPvIitOxQHPQnJFqT7jGdZ7NbuQKBgQCa\nLjTpOqoNHX3ER0PDDLh7AoQIFHWUcdYgG1qkCUAyPrgZMIZqKb51QVwh5RbY1DfN\n1QVQZtjwg9XnOYXpIcm4GepYf/9AaCV4wLiSCgAPxsTNSsoaKUSii3wg18IyCxbr\nO3hiWjotF3/p+GyrHsgrl1fDrEgITH7T9Da1/6fmlQKBgHbf59xNrAJjGYADV8K8\nUtnVvldUDyjRlcuAjK76Xf5rtmYGEoWBEUWEytGGH6ioM9KfccC94RgbEvDxON19\nutmeFAbTu3MQswSWoze4lDa8OhXDKmM/44Re9BPTS0h9hDrugk0oPgTOuz4iWNm7\nggSs2SdUAtKTNwH1ZDMH+34s\n-----END PRIVATE KEY-----\n",
+  "client_email": "tprophecy-handle-buckets@tprophecy-378622.iam.gserviceaccount.com",
+  "client_id": "112939917039674531865",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/tprophecy-handle-buckets%40tprophecy-378622.iam.gserviceaccount.com"
+}
