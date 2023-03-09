@@ -1,7 +1,7 @@
 import os
-import src.datacollection.webscraping.cec_webscrape as wb
-import src.datacollection.csvgathering.csv_read as cr
-import src.cloud_functions.trigger.read_cloud_storage as rcs
+import Code.src.dataengineering.webscraping.cec_webscrape as wb
+import Code.src.dataengineering.csvgathering.csv_read as cr
+import Code.src.cloud_functions.trigger.read_cloud_storage as rcs
 
 if __name__ == '__main__':
     print("Starting main function...")

@@ -1,0 +1,187 @@
+{
+  "creationTimestamp": "2023-03-04T15:50:17.435-08:00",
+  "id": "6897130873874704342",
+  "instanceProperties": {
+    "description": "This bash script executes to perform all of the necessary installments for our instance. Since this is only going to be used once a year, we just need to have it available in the short term.",
+    "scheduling": {
+      "onHostMaintenance": "MIGRATE",
+      "provisioningModel": "STANDARD",
+      "automaticRestart": true,
+      "preemptible": false
+    },
+    "tags": {
+      "fingerprint": "42WmSpB8rSM="
+    },
+    "disks": [
+      {
+        "guestOsFeatures": [
+          {
+            "type": "UEFI_COMPATIBLE"
+          },
+          {
+            "type": "VIRTIO_SCSI_MULTIQUEUE"
+          },
+          {
+            "type": "GVNIC"
+          }
+        ],
+        "type": "PERSISTENT",
+        "licenses": [
+          "https://www.googleapis.com/compute/beta/projects/debian-cloud/global/licenses/debian-11-bullseye"
+        ],
+        "deviceName": "cec-instance-1",
+        "autoDelete": true,
+        "source": "https://www.googleapis.com/compute/beta/projects/tprophecy-378622/zones/us-central1-a/disks/cec-instance-1",
+        "index": 0,
+        "boot": true,
+        "kind": "compute#attachedDisk",
+        "mode": "READ_WRITE",
+        "interface": "SCSI",
+        "diskSizeGb": "10"
+      }
+    ],
+    "networkInterfaces": [
+      {
+        "stackType": "IPV4_ONLY",
+        "name": "nic0",
+        "network": "https://www.googleapis.com/compute/beta/projects/tprophecy-378622/global/networks/default",
+        "accessConfigs": [
+          {
+            "name": "External NAT",
+            "type": "ONE_TO_ONE_NAT",
+            "natIP": "34.123.176.80",
+            "kind": "compute#accessConfig",
+            "networkTier": "PREMIUM"
+          }
+        ],
+        "subnetwork": "https://www.googleapis.com/compute/beta/projects/tprophecy-378622/regions/us-central1/subnetworks/default",
+        "networkIP": "10.128.0.2",
+        "fingerprint": "cxzO3Oj3Hws=",
+        "kind": "compute#networkInterface"
+      }
+    ],
+    "canIpForward": false,
+    "machineType": "e2-micro",
+    "metadata": {
+      "fingerprint": "NbjG0VJxWP4=",
+      "kind": "compute#metadata",
+      "items": [
+        {
+          "value": "sudo apt update\nsudo apt -y install bzip2 git libxml2-dev\nsudo apt -y install python3 pip\n\nsudo pip3 install beautifulsoup4 gcloud glob2 virtualenv\nsudo pip3 install google-api-core google-auth google-cloud-compute google-cloud-core google-cloud-storage\n\n#Note: You can replace with your email address for the bash script\ngit config --global user.name 'Joe Brock'\ngit config --global user.email 'joebbrock3@gmail.com'\n\ncurl -u \"Authorization: token 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\" https://github.com/GoswamiSagarD/Team-Prophecy.git\ngit clone -b master https://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@github.com/GoswamiSagarD/Team-Prophecy.git\ncd Team-Prophecy\npython3 ./main.py\n\n#gcloud compute snapshots list --project tprophecy-378622 #<- For listing all snapshots under our project\ngcloud compute snapshots delete --quiet cec-snapshots\ngcloud compute snapshots create \"cec-snapshot\" \\\n  --source-disk \"cec-instance-1\" \\\n  --disk-zone \"us-east4-c\" \\\n  --snapshot-type \"STANDARD\"\ngcloud compute instance delete cec-instance-1 --quiet --zone=us-east4-c",
+          "key": "startup-script"
+        }
+      ]
+    },
+    "minCpuPlatform": "",
+    "serviceAccounts": [
+      {
+        "email": "tprophecy-handle-buckets@tprophecy-378622.iam.gserviceaccount.com",
+        "scopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ]
+      }
+    ]
+  },
+  "kind": "compute#machineImage",
+  "name": "cec-snapshot",
+  "savedDisks": [
+    {
+      "storageBytesStatus": "UP_TO_DATE",
+      "sourceDisk": "projects/tprophecy-378622/zones/us-central1-a/disks/cec-instance-1",
+      "storageBytes": "685397056",
+      "kind": "compute#savedDisk"
+    }
+  ],
+  "selfLink": "projects/tprophecy-378622/global/machineImages/cec-snapshot",
+  "sourceInstance": "https://www.googleapis.com/compute/beta/projects/tprophecy-378622/zones/us-central1-a/instances/cec-instance-1",
+  "sourceInstanceProperties": {
+    "description": "This bash script executes to perform all of the necessary installments for our instance. Since this is only going to be used once a year, we just need to have it available in the short term.",
+    "scheduling": {
+      "onHostMaintenance": "MIGRATE",
+      "provisioningModel": "STANDARD",
+      "automaticRestart": true,
+      "preemptible": false
+    },
+    "tags": {
+      "fingerprint": "42WmSpB8rSM="
+    },
+    "networkInterfaces": [
+      {
+        "stackType": "IPV4_ONLY",
+        "name": "nic0",
+        "network": "https://www.googleapis.com/compute/beta/projects/tprophecy-378622/global/networks/default",
+        "accessConfigs": [
+          {
+            "name": "External NAT",
+            "type": "ONE_TO_ONE_NAT",
+            "natIP": "34.123.176.80",
+            "kind": "compute#accessConfig",
+            "networkTier": "PREMIUM"
+          }
+        ],
+        "subnetwork": "https://www.googleapis.com/compute/beta/projects/tprophecy-378622/regions/us-central1/subnetworks/default",
+        "networkIP": "10.128.0.2",
+        "fingerprint": "cxzO3Oj3Hws=",
+        "kind": "compute#networkInterface"
+      }
+    ],
+    "disks": [
+      {
+        "guestOsFeatures": [
+          {
+            "type": "UEFI_COMPATIBLE"
+          },
+          {
+            "type": "VIRTIO_SCSI_MULTIQUEUE"
+          },
+          {
+            "type": "GVNIC"
+          }
+        ],
+        "type": "PERSISTENT",
+        "storageBytesStatus": "UP_TO_DATE",
+        "licenses": [
+          "projects/707281592825/global/licenses/debian-11-bullseye"
+        ],
+        "storageBytes": "685397056",
+        "deviceName": "cec-instance-1",
+        "autoDelete": true,
+        "source": "projects/tprophecy-378622/zones/us-central1-a/disks/cec-instance-1",
+        "index": 0,
+        "diskType": "pd-balanced",
+        "boot": true,
+        "kind": "compute#savedAttachedDisk",
+        "mode": "READ_WRITE",
+        "interface": "SCSI",
+        "diskSizeGb": "10"
+      }
+    ],
+    "canIpForward": false,
+    "keyRevocationActionType": "NONE",
+    "deletionProtection": false,
+    "machineType": "e2-micro",
+    "metadata": {
+      "fingerprint": "NbjG0VJxWP4=",
+      "kind": "compute#metadata",
+      "items": [
+        {
+          "value": "sudo apt update\nsudo apt -y install bzip2 git libxml2-dev\nsudo apt -y install python3 pip\n\nsudo pip3 install beautifulsoup4 gcloud glob2 virtualenv\nsudo pip3 install google-api-core google-auth google-cloud-compute google-cloud-core google-cloud-storage\n\n#Note: You can replace with your email address for the bash script\ngit config --global user.name 'Joe Brock'\ngit config --global user.email 'joebbrock3@gmail.com'\n\ncurl -u \"Authorization: token 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\" https://github.com/GoswamiSagarD/Team-Prophecy.git\ngit clone -b master https://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@github.com/GoswamiSagarD/Team-Prophecy.git\ncd Team-Prophecy\npython3 ./main.py\n\n#gcloud compute snapshots list --project tprophecy-378622 #<- For listing all snapshots under our project\ngcloud compute snapshots delete --quiet cec-snapshots\ngcloud compute snapshots create \"cec-snapshot\" \\\n  --source-disk \"cec-instance-1\" \\\n  --disk-zone \"us-east4-c\" \\\n  --snapshot-type \"STANDARD\"\ngcloud compute instance delete cec-instance-1 --quiet --zone=us-east4-c",
+          "key": "startup-script"
+        }
+      ]
+    },
+    "serviceAccounts": [
+      {
+        "email": "tprophecy-handle-buckets@tprophecy-378622.iam.gserviceaccount.com",
+        "scopes": [
+          "https://www.googleapis.com/auth/cloud-platform"
+        ]
+      }
+    ]
+  },
+  "status": "READY",
+  "storageLocations": [
+    "us-east4"
+  ],
+  "totalStorageBytes": "685397056"
+}
