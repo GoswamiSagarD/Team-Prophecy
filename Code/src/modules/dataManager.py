@@ -57,9 +57,9 @@ class DataManager:
                 'd_desc' : 'Student Final Enrollment Status Information processed from the Enrollment Data.',
                 'd_state' : {
                     'processed' : {
-                        'db' : os.path.join( 'Data', '03_final', 'enrollmentFinalStatus.db' ),
-                        'csv' : os.path.join( 'Data', '03_final', 'enrollmentFinalStatus.csv' ),
-                        'pkl' : os.path.join( 'Data', '03_final', 'enrollmentFinalStatus.pkl' )
+                        'db' : os.path.join( 'Data', '02_processed', 'enrollmentFinalStatus.db' ),
+                        'csv' : os.path.join( 'Data', '02_processed', 'enrollmentFinalStatus.csv' ),
+                        'pkl' : os.path.join( 'Data', '02_processed', 'enrollmentFinalStatus.pkl' )
                     }
                 }
             }
