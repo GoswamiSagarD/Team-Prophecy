@@ -1,5 +1,5 @@
 # importing the custom modules
-from Code.src.DataEngineering._DataEngineering import buildAllData
+from Code.src.dataengineering._DataEngineering import buildAllData
 
 
 # defining the main function
