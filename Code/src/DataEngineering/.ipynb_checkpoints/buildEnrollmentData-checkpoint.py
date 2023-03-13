@@ -2,6 +2,8 @@
 # importing required libraries
 import os
 import glob
+
+import numpy as np
 import pandas as pd
 
 # importing the custom modules
@@ -148,6 +150,23 @@ def buildEnrollmentData():
     ]]
 
     print("Exporting the Enrollment Data... [3/3]")
+    db_connection = ConnectDB(os.path.join("Data", "02_processed", "intermediate.db"))
+    #Grab record_id, rec_ext_date
+    deg_lvl_data = df_enrollment.loc[:,["stu_deg_level"]]
+    student_data = df_enrollment.loc[:,["stu_name", "stu_admit_term_code","stu_deg_level","stu_college","stu_dept","stu_prog_code","stu_res","stu_visa","stu_bam"]]
+    reg_status_data = df_enrollment.groupby(["reg_term_code", "stu_id", "crs_sect","reg_status","stu_new_ret"]).agg({"reg_status_date": [np.max]})
+    reg_log_data = df_enrollment.loc[:,["rec_id","rec_ext_date","file_name","file_index"]]
+    crs_data = df_enrollment.loc[:,["crs","crs_type","crs_credits","crs_hours"]]
+    term_data = df_enrollment.loc[:,["reg_term_code","reg_term_year","reg_term_name","reg_term_desc"]]
+
+    #Things that must be implemented later on in this process (Probably would be included in a starter database)
+    # dept_data = df_enrollment.loc[:,["stu_dept_desc",""]]
+    # colleges_data = df_enrollment.loc[:,[""]]
+    # campus_data = df_enrollment.loc[:,[]] #<- None so far
+    # crs_section_data = df_enrollment.loc[:,["crs","crs_sect","crs_sect_clg","stu_dept",""]]
+    # instructor_data = df_enrollment.loc[:,[]] <- None so far
+    # prereq_data = df_enrollment.loc[:,[]]
+
     # Saving the dataframe as a pickle file
     df_enrollment.to_pickle(
         os.path.join("Data", "02_processed", "enrollment.pkl")

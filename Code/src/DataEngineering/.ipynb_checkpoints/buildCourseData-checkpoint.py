@@ -6,9 +6,11 @@ import pandas as pd
 
 # importing the custom modules
 from Code.src.modules.db_ops import *
+from Code.src.dataengineering.buildWebscrapeData import *
 
 
 def buildCourseData():
+    init()
     # Course Data
     print("#"*40, "\t", "\n", "Course Data")
     # Copying the course database file to the processed folder
