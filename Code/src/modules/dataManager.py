@@ -62,6 +62,17 @@ class DataManager:
                         'pkl' : os.path.join( 'Data', '02_processed', 'enrollmentFinalStatus.pkl' )
                     }
                 }
+            },
+            'weights' : {
+                'd_name' : 'Weights',
+                'd_desc' : 'Weights for the Weighted Projections calculated from previous enrollment.',
+                'd_state' : {
+                    'processed' : {
+                        'db' : os.path.join( 'Data', '02_processed', 'weights.db' ),
+                        'csv' : os.path.join( 'Data', '02_processed', 'weights.csv' ),
+                        'pkl' : os.path.join( 'Data', '02_processed', 'weights.pkl' )
+                    }
+                }
             }
         }
     
