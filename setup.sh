@@ -35,8 +35,8 @@ cd "Team-Prophecy"
 echo "################################################################################"
 echo "Setting up the Conda environment..."
 if conda info --envs | grep -q "prophecy"; then
-  # Update environment from YAML file
-  conda env update --file "prophecy_env.yml"
+  # Remove the environment
+  conda remove --name prophecy --all
 else
   # Create environment from YAML file
   conda env create -f "prophecy_env.yml"
