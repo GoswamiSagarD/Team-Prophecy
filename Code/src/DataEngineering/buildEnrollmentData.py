@@ -77,7 +77,7 @@ def buildEnrollmentData():
     # Cleaning the data
     print("Cleaning the Enrollment Data... [2/3]")
     df_enrollment['stu_id'].dropna(inplace=True)
-    df_enrollment['stu_visa'].fillna("Not Relevent", inplace=True)
+    df_enrollment['stu_visa'].fillna("Not Relevant", inplace=True)
 
     df_enrollment['stu_bam'].replace("'--", "Not BAM", inplace=True)
     df_enrollment['stu_dept'].replace("'-----", "No Value", inplace=True)
