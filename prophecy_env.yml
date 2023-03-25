@@ -2,6 +2,7 @@ name: prophecy
 channels:
   - defaults
 dependencies:
+  - scikit-learn
   - ipykernel
   - jupyter
   - pandas

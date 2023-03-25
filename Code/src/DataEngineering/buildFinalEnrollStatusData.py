@@ -24,6 +24,9 @@ def buildFinalEnrollStatusData():
         ORDER BY final_reg_date;
     """)
 
+    # Adding a column to indicate this is a final record
+    df_enrollmentFinalStatus["final_status"] = True
+
     df_enrollmentFinalStatus = df_enrollment[df_enrollment["rec_id"].isin(df_enrollmentFinalStatus["rec_id"])]
 
     # Exporting the final status of the students
