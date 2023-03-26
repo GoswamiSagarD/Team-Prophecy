@@ -5,13 +5,14 @@
 # import pandas as pd
 
 # importing the custom modules
-from Code.src.DataEngineering.buildCourseData               import buildCourseData
-from Code.src.DataEngineering.buildEnrollmentData           import buildEnrollmentData
-from Code.src.DataEngineering.buildProfessorData            import buildProfessorData
-from Code.src.DataEngineering.buildFinalEnrollStatusData    import buildFinalEnrollStatusData
-
+from Code.src.dataengineering.buildCourseData               import buildCourseData
+from Code.src.dataengineering.buildEnrollmentData           import buildEnrollmentData
+from Code.src.dataengineering.buildProfessorData            import buildProfessorData
+from Code.src.dataengineering.buildFinalEnrollStatusData    import buildFinalEnrollStatusData
+from Code.src.dataengineering.buildInitialDatabaseTables    import buildInitCreateDBS
 
 def buildAllData():
+    buildInitCreateDBS()
     buildCourseData()
     buildEnrollmentData()
     buildProfessorData()

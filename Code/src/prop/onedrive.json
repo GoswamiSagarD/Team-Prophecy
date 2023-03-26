@@ -1,0 +1,9 @@
+{
+    "onedrive": {
+        "tenant_id":"85287171-b1f1-43ed-a124-933247acfa9b",
+        "client_id": "",
+        "client_secret_value": "",
+        "redirect_url": "https://gmuedu-my.sharepoint.com/personal/bschmid5_gmu_edu/_layouts/15/onedrive.aspx?ct=1676165126557&or=OWA%2DNT&cid=5b94f7e2%2D7e72%2D7459%2D825f%2D4ec2cfb5ee4a&ga=1&id=%2Fpersonal%2Fbschmid5%5Fgmu%5Fedu%2FDocuments%2F202310%20Spring%20Semester%2FDAEN%20690%2D006%2FTeam%20Prophecy%2FEnrollment%20Mangement%20Data%2FCSV%20Hist%20CEC%20to%20Transfer",
+        "refresh_token": null
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "project_id": "tprophecy-378622",
+  "zone_id": "us-east4-a",
+  "instance_name": "tprophecy",
+  "instance_template_id": "",
+  "source_snapshot": "projects/tprophecy-378622/zones/us-central1-a/disks/cec-instance-1",
+  "disk_type": "STANDARD",
+  "disk_size_gb": "10"
+}
