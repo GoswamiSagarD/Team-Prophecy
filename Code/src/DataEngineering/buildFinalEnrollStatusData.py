@@ -37,4 +37,24 @@ def buildFinalEnrollStatusData():
     db_enrollmentFinalStatus = ConnectDB( os.path.join("Data", "02_processed", "enrollmentFinalStatus.db") )
     df_enrollmentFinalStatus.to_sql("enrollmentFinalStatus", db_enrollmentFinalStatus.connection, if_exists="replace", index=False)
 
+
+    # Fetching the final snapshot of registration data for each semester
+    df_FinalSnapshot = db_enrollment.runQuery(""" --sql
+        SELECT *
+        FROM enrollment4EDA
+        WHERE
+            rec_ext_date IN (
+                SELECT MAX(rec_ext_date) AS LatestSnapshot
+                FROM enrollment4EDA
+                GROUP BY reg_term_desc
+                ORDER BY reg_term_code)
+    """)
+
+    # Exporting the final snapshot
+    df_FinalSnapshot.to_csv( os.path.join('Data', '02_processed', 'final_snapshot.csv') )
+    df_FinalSnapshot.to_pickle( os.path.join('Data', '02_processed', 'final_snapshot.pkl') )
+
+    db_FinalSnapshot = ConnectDB( os.path.join("Data", "02_processed", "final_snapshot.db") )
+    df_FinalSnapshot.to_sql("FinalSnapshot", db_FinalSnapshot.connection, if_exists="replace", index=False)
+
     print("Final Enrollment Status Data is ready for EDA!")

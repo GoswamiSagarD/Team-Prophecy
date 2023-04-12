@@ -62,6 +62,17 @@ class DataManager:
                         'pkl' : os.path.join( 'Data', '02_processed', 'enrollmentFinalStatus.pkl' )
                     }
                 }
+            },
+            'finalsnapshot' : {
+                'd_name' : 'Final Snapshot of Student Enrollment Status Data',
+                'd_desc' : 'Final Snapshot of Student Enrollment Status Information processed from the Enrollment Data.',
+                'd_state' : {
+                    'processed' : {
+                        'db' : os.path.join( 'Data', '02_processed', 'final_snapshot.db' ),
+                        'csv' : os.path.join( 'Data', '02_processed', 'final_snapshot.csv' ),
+                        'pkl' : os.path.join( 'Data', '02_processed', 'final_snapshot.pkl' )
+                    }
+                }
             }
         }
     
