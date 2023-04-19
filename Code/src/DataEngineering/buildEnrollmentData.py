@@ -8,7 +8,11 @@ import pandas as pd
 
 # importing the custom modules
 from Code.src.modules.db_ops import *
+from Code.src.modules.dataManager import DataManager
 
+
+DM = DataManager()
+course_catalog = DM.get_data('coursecatalog', 'json')
 
 def buildEnrollmentData():
     # # Enrollment Data
@@ -93,6 +97,22 @@ def buildEnrollmentData():
     df_enrollment['crs_credits'].replace("4-Jan", "1-4", inplace=True)
     df_enrollment['crs_credits'].replace("0,3", "0-3", inplace=True)
 
+    # Adding Course Type Column
+    df_enrollment['crs_req'] = "Data Not Recorded"
+    df_enrollment \
+        .loc[
+            df_enrollment['stu_prog_desc'].isin(course_catalog.keys()), 'crs_req'
+        ] = "Not Required"
+    for i_prog in course_catalog.keys():
+        for i_crs_req in ['Core', 'Capstone', 'Elective']:
+            df_enrollment \
+                .loc[
+                    df_enrollment['stu_prog_desc'].isin([i_prog]) &
+                    df_enrollment['crs'].isin(course_catalog[i_prog][i_crs_req]),
+                    'crs_req'
+                ] = i_crs_req
+
+
     # sorting the dataframe by term code and registration status date
     df_enrollment.sort_values(
         by=['reg_term_code', 'rec_ext_date', 'reg_status_date'], inplace=True
@@ -123,6 +143,7 @@ def buildEnrollmentData():
     df_enrollment['stu_visa']               = df_enrollment['stu_visa'].astype('category')
     df_enrollment['stu_bam']                = df_enrollment['stu_bam'].astype('category')
     df_enrollment['crs_sect_clg']           = df_enrollment['crs_sect_clg'].astype('category')
+    df_enrollment['crs_req']                = df_enrollment['crs_req'].astype('category')
     df_enrollment['crs_type']               = df_enrollment['crs_type'].astype('category')
     df_enrollment['crs_sect_modality']      = df_enrollment['crs_sect_modality'].astype('category')
     df_enrollment['crs_sect_wiley_ind']     = df_enrollment['crs_sect_wiley_ind'].astype('category')
@@ -131,7 +152,7 @@ def buildEnrollmentData():
     df_enrollment['stu_act_reg_ind']        = df_enrollment['stu_act_reg_ind'].astype('category')
     df_enrollment['reg_status']             = df_enrollment['reg_status'].astype('category')
     df_enrollment['reg_status_date']        = pd.to_datetime(df_enrollment['reg_status_date'])
-
+    
     # reordering the columns
     df_enrollment = df_enrollment[[
         # Records Info
@@ -143,30 +164,13 @@ def buildEnrollmentData():
         'stu_dept', 'stu_dept_desc', 'stu_prog_code', 'stu_prog_level', 'stu_prog_desc',
         'stu_admit_term_code', 'stu_admit_term_year', 'stu_admit_term_name', 'stu_admit_term_desc',
         # Course Info
-        'crs', 'crs_type', 'crs_credits', 'crs_hours',
+        'crs_req', 'crs', 'crs_type', 'crs_credits', 'crs_hours',
         'crs_sect', 'crs_sect_clg', 'crs_sect_modality', 'crs_sect_wiley_ind',
         # Registration Status Info
         'reg_status', 'reg_status_date', 'stu_act_reg_ind'
     ]]
 
     print("Exporting the Enrollment Data... [3/3]")
-    db_connection = ConnectDB(os.path.join("Data", "02_processed", "intermediate.db"))
-    #Grab record_id, rec_ext_date
-    deg_lvl_data = df_enrollment.loc[:,["stu_deg_level"]]
-    student_data = df_enrollment.loc[:,["stu_name", "stu_admit_term_code","stu_deg_level","stu_college","stu_dept","stu_prog_code","stu_res","stu_visa","stu_bam"]]
-    reg_status_data = df_enrollment.groupby(["reg_term_code", "stu_id", "crs_sect","reg_status","stu_new_ret"]).agg({"reg_status_date": [np.max]})
-    reg_log_data = df_enrollment.loc[:,["rec_id","rec_ext_date","file_name","file_index"]]
-    crs_data = df_enrollment.loc[:,["crs","crs_type","crs_credits","crs_hours"]]
-    term_data = df_enrollment.loc[:,["reg_term_code","reg_term_year","reg_term_name","reg_term_desc"]]
-
-    #Things that must be implemented later on in this process (Probably would be included in a starter database)
-    # dept_data = df_enrollment.loc[:,["stu_dept_desc",""]]
-    # colleges_data = df_enrollment.loc[:,[""]]
-    # campus_data = df_enrollment.loc[:,[]] #<- None so far
-    # crs_section_data = df_enrollment.loc[:,["crs","crs_sect","crs_sect_clg","stu_dept",""]]
-    # instructor_data = df_enrollment.loc[:,[]] <- None so far
-    # prereq_data = df_enrollment.loc[:,[]]
-
     # Saving the dataframe as a pickle file
     df_enrollment.to_pickle(
         os.path.join("Data", "02_processed", "enrollment.pkl")
@@ -178,10 +182,10 @@ def buildEnrollmentData():
     )
 
     # Saving the dataframe to a new sqlite database
-    db_enrollment4EDA = ConnectDB(
-        os.path.join("Data", "02_processed", "enrollment4EDA.db")
+    db_CECData = ConnectDB(
+        os.path.join("Data", "02_processed", "CECData.db")
     )
-    df_enrollment.to_sql('enrollment4EDA', db_enrollment4EDA.connection, if_exists='replace', index=False)
-    db_enrollment4EDA.commitDB()
+    df_enrollment.to_sql(name='enrollment', con=db_CECData.connection, if_exists='replace', index=False)
+    db_CECData.commitDB()
 
     print("Enrollment Data processed successfully!")

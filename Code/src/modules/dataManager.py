@@ -3,6 +3,7 @@
 # Importing the required libraries
 import os
 import pandas as pd
+import json
 import pprint
 from Code.src.modules.db_ops import ConnectDB
 
@@ -26,7 +27,7 @@ class DataManager:
                 'd_desc' : 'Course information obtained from Web Scraping the course catalog.',
                 'd_state' : {
                     'processed' : {
-                        'db' : os.path.join( 'Data', '02_processed', 'course4EDA.db' )
+                        'db' : os.path.join( 'Data', '02_processed', 'course.db' )
                     }
                 }
             },
@@ -35,7 +36,7 @@ class DataManager:
                 'd_desc' : 'Student Enrollment Status Information processed by merging 110 CSV files obtained from Enrollment Management at George Mason University.',
                 'd_state' : {
                     'processed' : {
-                        'db' : os.path.join( 'Data', '02_processed', 'enrollment4EDA.db' ),
+                        'db' : os.path.join( 'Data', '02_processed', 'CECData.db' ),
                         'csv' : os.path.join( 'Data', '02_processed', 'enrollment.csv' ),
                         'pkl' : os.path.join( 'Data', '02_processed', 'enrollment.pkl' )
                     }
@@ -46,7 +47,7 @@ class DataManager:
                 'd_desc' : 'Professor Information obtained from Enrollment Management at George Mason University.',
                 'd_state' : {
                     'processed' : {
-                        'db' : os.path.join( 'Data', '02_processed', 'professor4EDA.db' ),
+                        'db' : os.path.join( 'Data', '02_processed', 'CECData.db' ),
                         'csv' : os.path.join( 'Data', '02_processed', 'professor.csv' ),
                         'pkl' : os.path.join( 'Data', '02_processed', 'professor.pkl' )
                     }
@@ -57,20 +58,29 @@ class DataManager:
                 'd_desc' : 'Student Final Enrollment Status Information processed from the Enrollment Data.',
                 'd_state' : {
                     'processed' : {
-                        'db' : os.path.join( 'Data', '02_processed', 'enrollmentFinalStatus.db' ),
+                        'db' : os.path.join( 'Data', '02_processed', 'CECData.db' ),
                         'csv' : os.path.join( 'Data', '02_processed', 'enrollmentFinalStatus.csv' ),
                         'pkl' : os.path.join( 'Data', '02_processed', 'enrollmentFinalStatus.pkl' )
                     }
                 }
             },
-            'finalsnapshot' : {
+            'enrollmentlatestsnapshot' : {
                 'd_name' : 'Final Snapshot of Student Enrollment Status Data',
                 'd_desc' : 'Final Snapshot of Student Enrollment Status Information processed from the Enrollment Data.',
                 'd_state' : {
                     'processed' : {
-                        'db' : os.path.join( 'Data', '02_processed', 'final_snapshot.db' ),
-                        'csv' : os.path.join( 'Data', '02_processed', 'final_snapshot.csv' ),
-                        'pkl' : os.path.join( 'Data', '02_processed', 'final_snapshot.pkl' )
+                        'db' : os.path.join( 'Data', '02_processed', 'CECData.db' ),
+                        'csv' : os.path.join( 'Data', '02_processed', 'enrollmentLatestSnapshot.csv' ),
+                        'pkl' : os.path.join( 'Data', '02_processed', 'enrollmentLatestSnapshot.pkl' )
+                    }
+                }
+            },
+            'coursecatalog' : {
+                'd_name' : 'Course Catalog Data',
+                'd_desc' : 'Program Requirements Information obtained from the Course Catalog.',
+                'd_state' : {
+                    'processed' : {
+                        'json' : os.path.join( 'Code', 'src', 'prop', 'course_catalog.json' )
                     }
                 }
             }
@@ -84,23 +94,23 @@ class DataManager:
         ----------
         d_name : str
             Name of the database to be imported.
-        d_format : str [db, pkl, csv]
+        d_format : str in ['db', 'pkl', 'csv', 'json']
             Format of the database to be imported.
-        d_state : str [processed, final]
+        d_state : str in ['processed', 'final']
             State of the database to be imported.
         """
         
         # Raise an error if the arguments are invalid
         if d_name.lower() not in self.data_dict.keys():
-            raise ValueError("Invalid database name. Please check the database name and try again.\nTry using the get_data_info() method to get the list of available databases.")
+            raise ValueError("Invalid database name. Please check the database name and try again.\nUse get_data_info() method to get the list of available databases.")
         if d_state.lower() not in ['processed', 'final']:
-            raise ValueError("Invalid database state. Please check the database state and try again.\nTry using the get_data_info() method to get the list of available database states.")
+            raise ValueError("Invalid database state. Please check the database state and try again.\nUse get_data_info() method to get the list of available database states.")
         if d_state.lower() not in self.data_dict[d_name.lower()]['d_state'].keys():
-            raise ValueError(f"Invalid database state. The database isn't available in {d_state} state yet.\nTry using the get_data_info() method to get the list of available database states.")
-        if d_format.lower() not in ['db', 'pkl', 'csv']:
-            raise ValueError("Invalid database format. Please check the database format and try again.\nTry using the get_data_info() method to get the list of available database formats.")
+            raise ValueError(f"Invalid database state. The database isn't available in {d_state} state yet.\nUse get_data_info() method to get the list of available database states.")
+        if d_format.lower() not in ['db', 'pkl', 'csv', 'json']:
+            raise ValueError("Invalid database format. Please check the database format and try again.\nUse get_data_info() method to get the list of available database formats.")
         if d_format.lower() not in self.data_dict[d_name.lower()]['d_state'][d_state.lower()].keys():
-            raise ValueError(f"Invalid database format. The database isn't available in {d_format} format.\nTry using the get_data_info() method to get the list of available database formats.")
+            raise ValueError(f"Invalid database format. The database isn't available in {d_format} format.\nUse get_data_info() method to get the list of available database formats.")
         
         # Get the path to the database
         path = self.data_dict[d_name.lower()]['d_state'][d_state.lower()][d_format.lower()]
@@ -118,6 +128,10 @@ class DataManager:
         elif d_format.lower() in ['csv']:
             # Return the path to the csv file if the format is csv
             return path
+        elif d_format.lower() in ['json']:
+            # Return the json data as a dictionary if the format is json
+            with open(path, 'r') as file_data:
+                return json.load(file_data)
     
     
     def get_data_info(self):

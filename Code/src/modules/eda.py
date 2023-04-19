@@ -8,6 +8,8 @@ def summarize_one(col:str, df:pd.DataFrame, enforce_counts:bool = False):
     if col not in df.columns:
         raise ValueError(f"{col} is not a column in the dataframe.")
     
+
+    
     # Calculate the number of unique values and missing values
     n_unique = df[col].nunique()
     n_missing = df[col].isna().sum()

@@ -30,9 +30,13 @@ Please maintain the following coding practices:
 
 ## scripts
 
+### initiate.py
+
+To setup the project, run the  `initiate.py` file. This file in turn references the `Code/src/buildData.py` file to build the Dataset for the analysis. Additional modules can be added to this file in future to initiate the project.
+
 ### buildData.py
 
-To build the dataset, run the `Code/buildData.py` file. The buildData file will perform the following steps:
+The `buildData.py` will perform the following steps:
 
 1. Import the raw data in various formats.
 2. Process the raw data
@@ -58,14 +62,14 @@ To connect to SQLite Database and run queries. To use db_ops module:
 1. Connect to the SQLite Database
 
    ```python
-   db_enrollment = ConnectDB( os.path.join("..", "..", "Data", "02_processed", "enrollment4EDA.db") )
+   db = ConnectDB( os.path.join("Data", "02_processed", "CECData.db") )
    ```
 2. Run Queries on the Database
 
    ```
-   db_enrollment.run_query( query = """
+   db.run_query( query = """
    	SELECT *
-   	FROM enrollment4EDA
+   	FROM enrollment
    	WHERE crs_dept = ""
    """)
    ```

@@ -1,7 +1,6 @@
 # Initiation
 # importing required libraries
 import os
-import glob
 import pandas as pd
 
 # importing the custom modules
@@ -36,7 +35,6 @@ def buildProfessorData():
         "Course Sect Term Seats Avail"          : "crs_sect_enroll_avail",
         "Course Sect Term Waitlist Count"       : "crs_sect_enroll_waitlist",
     }
-
     df_professor.rename(columns=rename_dict, inplace=True)
 
     # Extracting features from the dataset
@@ -109,9 +107,9 @@ def buildProfessorData():
 
     # Saving the dataframe to a new sqlite database
     db_professor = ConnectDB(
-        os.path.join("Data", "02_processed", "professor4EDA.db")
+        os.path.join("Data", "02_processed", "CECData.db")
     )
-    df_professor.to_sql('professor4EDA', db_professor.connection, if_exists='replace', index=False)
+    df_professor.to_sql('professor', db_professor.connection, if_exists='replace', index=False)
     db_professor.commitDB()
 
     print("Professor Data processed successfully!")

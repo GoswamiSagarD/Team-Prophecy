@@ -1,7 +1,7 @@
 # Configuring a SQLite Database operations
 class ConnectDB:
     """
-    Connect to a SQLite database and run queries on it
+    Connect to a SQLite database and run queries on it. An abstraction layer to simplify the process of running queries on SQLite databases.
 
     Args:
         db_path (str): The path to the database
