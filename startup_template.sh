@@ -7,10 +7,10 @@ sudo pip3 install google-api-core google-auth google-cloud-compute google-cloud-
 
 #Note: You can replace with your email address for the bash script
 git config --global user.name 'Joe Brock'
-git config --global user.email 'joebbrock3@gmail.com'
+git config --global user.email 'joebrock3@yahoo.com'
 
-curl -u "Authorization: token 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" https://github.com/GoswamiSagarD/Team-Prophecy.git
-git clone -b master https://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@github.com/GoswamiSagarD/Team-Prophecy.git
+curl -u "Authorization: token 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" https://github.com/GoswamiSagarD/Team-Prophecy.git
+git clone -b master https://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@github.com/GoswamiSagarD/Team-Prophecy.git
 cd Team-Prophecy
 python3 ./main.py
 #THIS WORKS
